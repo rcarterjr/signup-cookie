@@ -2,35 +2,47 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<title></title>
+		<title>Signup Form</title>
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+			integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+			crossorigin="anonymous"
+		/>
 	</head>
 	<body onload="checkCookie()">
-		<form
-			action="https://signupapp2.com/signupapp/signups/process"
-			method="post"
-			onsubmit="validateEmail()"
-			name="form"
-		>
-			<label>Email Address</label>
-			<input
-				type="text"
-				name="signup.emailAddress"
-				id="emailAddress"
-				required
-			/>
+		<div class="p-3 mb-2 bg-light text-dark">
+			<form
+				action="https://signupapp2.com/signupapp/signups/process"
+				method="post"
+				onsubmit="validateEmail()"
+				name="form"
+			>
+				<div class="mx-auto" id="formid">
+					<label for="exampleInputEmail1">Email Address</label>
+					<input
+						type="text"
+						name="signup.emailAddress"
+						id="emailAddress"
+						placeholder="Enter email"
+						class="form-control"
+						required
+					/>
 
-			<input name="signup.listCode" type="hidden" value="TRADEDAY" />
+					<input name="signup.listCode" type="hidden" value="TRADEDAY" />
 
-			<input name="signup.sourceId" type="hidden" value="XXTEST" />
+					<input name="signup.sourceId" type="hidden" value="XXTEST" />
 
-			<input
-				name="signup.welcomeEmailTemplateName"
-				type="hidden"
-				value="tradeday_generic"
-			/>
+					<input
+						name="signup.welcomeEmailTemplateName"
+						type="hidden"
+						value="tradeday_generic"
+					/>
 
-			<input type="submit" value="Submit" />
-		</form>
+					<input type="submit" value="Submit" class="btn btn-primary" />
+				</div>
+			</form>
+		</div>
 		<script type="text/javascript">
 			function checkCookie() {
 				// if a cookie exists, then display the thank you
@@ -39,7 +51,7 @@
 
 			function validateEmail() {
 				var email = document.getElementById("emailAddress").value;
-				var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+				var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regular Expression of a valid email
 
 				if (regex.test(email)) {
 					event.preventDefault(); // stops the redirection on successful signup
@@ -60,12 +72,23 @@
 				now.setTime(expireTime);
 				var expires = now.toGMTString(); // must be in GMT string format
 
-				// USE FIREFOX ~ Chrome does not support local cookies
-				// https://stackoverflow.com/questions/8105135/cannot-set-cookies-in-javascript
 				document.cookie = `name=${cookievalue};expires=${expires};`;
 				// should show thank you instead of cookie
-				document.write(document.cookie);
+				document.write("<h1>Thank you for signing up</h1>");
+				document.body.style.backgroundColor = "#BEBEBE";
+				console.log(document.cookie);
 			}
 		</script>
+		<style>
+			body {
+				background-color: #bebebe;
+			}
+			#formid {
+				width: 60%;
+			}
+			#emailAddress {
+				margin-bottom: 20px;
+			}
+		</style>
 	</body>
 </html>
